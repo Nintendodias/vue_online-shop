@@ -48,7 +48,7 @@ export default {
 			this.changePage(this.page - 1);
 		},
 		next() {
-			if (this.page >= this.pages) {
+			if (this.page >= this.pages) { 
 				return
 			}
 			this.changePage(this.page + 1);

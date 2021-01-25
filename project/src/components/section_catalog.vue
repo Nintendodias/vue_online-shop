@@ -1,38 +1,63 @@
 <template>
 	<section class="catalog">
-		
-		<ProductList :products="products" />
+		<ProductList :products="productsArr" />
 		<ProductPagination :page.sync="page" :count="countProducts" :per-page="productsPerPage" />
 	</section>
 </template>
 
 <script>
-	import ProductList from "./section_catalog/catalog_list.vue";
-	import ProductPagination from "./interface/v_pagination"
+	import ProductList from './section_catalog/catalog_list.vue';
+	import ProductPagination from './interface/v_pagination';
 	import products from "../data/products";
+
 
 	export default {
 		name: 'section_catalog',
+		props: ['priceMin', 'priceMax', 'categoryId'],
 		components: {
 			ProductList,
-			ProductPagination
+			ProductPagination,
 		},
 		data() {
 			return {
 				page: 1,
 				productsPerPage: 6,
-			}
+			};
 		},
 		computed: {
-			products() {
+			filteredProducts() {
+				let filteredProducts = products;
+
+				if (this.priceMin > 0) {
+					filteredProducts = filteredProducts.filter(
+						(product) => product.price >= this.priceMin,
+					);
+				}
+
+				if (this.priceMax > 0) {
+					filteredProducts = filteredProducts.filter(
+						(product) => product.price <= this.priceMax,
+					);
+				}
+
+				if (this.categoryId) {
+					filteredProducts = filteredProducts.filter(
+						(product) => product.categoryId === this.categoryId,
+					);
+				}
+
+				return filteredProducts
+			},
+			productsArr() {
 				//offset нужен для перелистывания страниц. Меняется только 1 параметр, выбираются следующие эл-ты массива
 				const offset = (this.page - 1) * this.productsPerPage;
-				return products.slice(offset, offset + this.productsPerPage);
+
+				return this.filteredProducts.slice(offset, offset + this.productsPerPage);
 			},
 			countProducts() {
-				return products.length;
-			}
-		}
+				return this.filteredProducts.length;
+			},
+		},
 	};
 </script>
 

@@ -6,7 +6,7 @@
 
 		<h3 class="catalog__title">
 			<a href="#">
-				{{ product.name }}
+				{{ product.name }} 
 			</a>
 		</h3>
 
