@@ -11,7 +11,7 @@
 
 		<div class="content__catalog">
 			<section_filter :priceMin.sync="filterPriceMin" :priceMax.sync="filterPriceMax" :categoryId.sync="filterCategoryId"/>
-			<section_catalog :priceMin.sync="filterPriceMin" :priceMax.sync="filterPriceMax" :categoryId.sync="filterCategoryId" />
+			<section_catalog :priceMin="filterPriceMin" :priceMax="filterPriceMax" :categoryId="filterCategoryId" />
 		</div>
 	</main>
 </template>
