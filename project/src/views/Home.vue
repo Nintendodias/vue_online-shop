@@ -10,8 +10,8 @@
 		</div>
 
 		<div class="content__catalog">
-			<section_filter :priceMin.sync="filterPriceMin" :priceMax.sync="filterPriceMax" :categoryId.sync="filterCategoryId"/>
-			<section_catalog :priceMin="filterPriceMin" :priceMax="filterPriceMax" :categoryId="filterCategoryId" />
+			<section_filter :filterColor.sync="filterColor" :priceMin.sync="filterPriceMin" :priceMax.sync="filterPriceMax" :categoryId.sync="filterCategoryId"/>
+			<section_catalog :filterColor="filterColor" :priceMin="filterPriceMin" :priceMax="filterPriceMax" :categoryId="filterCategoryId" />
 		</div>
 	</main>
 </template>
@@ -27,7 +27,8 @@
       return {
         filterPriceMin: 0,
 				filterPriceMax: 0,
-				filterCategoryId: 0
+        filterCategoryId: 0,
+        filterColor: 'none'
       };
     },
 		components: {

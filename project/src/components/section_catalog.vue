@@ -3,7 +3,7 @@
 		<ProductList :products="productsArr" />
 		<ProductPagination :page.sync="page" :count="countProducts" :per-page="productsPerPage" />
 	</section>
-</template>
+</template> 
 
 <script>
 	import ProductList from './section_catalog/catalog_list.vue';
@@ -13,7 +13,7 @@
 
 	export default {
 		name: 'section_catalog',
-		props: ['priceMin', 'priceMax', 'categoryId'],
+		props: ['priceMin', 'priceMax', 'categoryId', 'filterColor'],
 		components: {
 			ProductList,
 			ProductPagination,
@@ -46,6 +46,10 @@
 					);
 				}
 
+				if (this.filterColor !== 'none') {
+					console.log(this.filterColor)
+					filteredProducts = filteredProducts.filter((product) => product.colors.some(color => this.filterColor === color));
+				}
 				return filteredProducts
 			},
 			productsArr() {
