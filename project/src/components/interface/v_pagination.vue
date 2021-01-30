@@ -1,7 +1,7 @@
 <template>
 	<ul class="catalog__pagination pagination">
 		<li class="pagination__item">
-			<a href="#" @click.prevent="prev"
+			<a href="#" @click.prevent="changePage(page - 1)"
 				class="pagination__link pagination__link--arrow" 
 				:class="{'pagination__link--disabled': page === 1}"
 				aria-label="Предыдущая страница"
@@ -13,13 +13,13 @@
 		</li>
 
 		<li class="pagination__item" v-for="pageNumber in pages" :key="pageNumber">
-			<a href="#" @click.prevent="paginate(pageNumber)" class="pagination__link" :class="{'pagination__link--current': pageNumber === page}">
+			<a href="#" @click.prevent="changePage(pageNumber)" class="pagination__link" :class="{'pagination__link--current': pageNumber === page}">
 				{{pageNumber}}
 			</a>
 		</li>
 
 		<li class="pagination__item">
-			<a href="#" @click.prevent="next" class="pagination__link pagination__link--arrow" :class="{'pagination__link--disabled': page === pages}" aria-label="Следующая страница">
+			<a href="#" @click.prevent="changePage(page + 1)" class="pagination__link pagination__link--arrow" :class="{'pagination__link--disabled': page === pages}" aria-label="Следующая страница">
 				<svg width="8" height="14" fill="currentColor">
 					<use xlink:href="#icon-arrow-right"></use>
 				</svg>
@@ -34,26 +34,14 @@ export default {
 	props: ['page', 'count', 'perPage'],
 	computed: {
 		pages() {
-			return Math.ceil(this.count / this.perPage)
+			return Math.ceil(this.count / this.perPage) 
 		},
 	},
 	methods: {
-		paginate(page) {
-			this.changePage(page);
-		},
-		prev() {
-			if (this.page - 1 <= 0) {
-				return
-			}
-			this.changePage(this.page - 1);
-		},
-		next() {
-			if (this.page >= this.pages) { 
-				return
-			}
-			this.changePage(this.page + 1);
-		},
 		changePage(page) {
+			if (page <= 0 || page > this.pages) {
+				return
+			}
 			this.$emit('update:page', page);
 		}
 	}

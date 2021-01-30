@@ -28,15 +28,8 @@
 			</fieldset>
 
 			<fieldset class="form__block">
-				<legend class="form__legend">Цвет</legend>
-				<ul class="colors">
-					<li class="colors__item" v-for="color in colors" :key="color.id">
-						<label class="colors__label">
-							<input class="colors__radio sr-only" type="radio" name="color" @click="currentColor = color.name" :value="color.name"/>
-							<span class="colors__value" :style="{ backgroundColor: color.encoding}"></span>
-						</label>
-					</li>
-				</ul>
+				<legend class="form__legend">Цвет</legend> 
+				<productColors :colorArray="colors" :currentColor.sync="currentColor" />
 			</fieldset>
 
 			<fieldset class="form__block">
@@ -117,7 +110,8 @@
 
 <script>
   import categories from '../data/categories';
-  import colors from '../data/colors'
+	import colors from '../data/colors';
+	import productColors from './interface/v-colors';
 
 	export default {
 		name: 'section_filter',
@@ -129,7 +123,10 @@
         currentCategoryId: 0,
         currentColor: 'none'
       };
-    },
+		},
+		components: {
+			productColors
+		},
 		computed: {
       // currentPriceMin: {
       //   //Вызывается в v-model у input с минимальной ценой v-model="currentPriceMin"
@@ -144,7 +141,7 @@
       //   }
       // },
 			categories() {
-				return categories;
+				return categories; 
       },
       colors() {
 				return colors;

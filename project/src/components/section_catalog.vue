@@ -47,7 +47,6 @@
 				}
 
 				if (this.filterColor !== 'none') {
-					console.log(this.filterColor)
 					filteredProducts = filteredProducts.filter((product) => product.colors.some(color => this.filterColor === color));
 				}
 				return filteredProducts

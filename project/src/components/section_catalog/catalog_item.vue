@@ -6,43 +6,54 @@
 
 		<h3 class="catalog__title">
 			<a href="#">
-				{{ product.name }} 
+				{{ product.name }}
 			</a>
 		</h3>
 
 		<span class="catalog__price"> {{ product.price }}₽ </span>
 
-		<ul class="colors colors--black">
-			<li class="colors__item">
-				<label class="colors__label">
-					<input class="colors__radio sr-only" type="radio" value="blue" v-model="color" />
-					<span class="colors__value" style="background-color: #73B6EA;"> </span>
-				</label>
-			</li>
-			<li class="colors__item">
-				<label class="colors__label">
-					<input class="colors__radio sr-only" type="radio" value="green" v-model="color" />
-					<span class="colors__value" style="background-color: #8BE000;"> </span>
-				</label>
-			</li>
-			<li class="colors__item">
-				<label class="colors__label">
-					<input class="colors__radio sr-only" type="radio" value="black" v-model="color" />
-					<span class="colors__value" style="background-color: #222;"> </span>
-				</label>
-			</li>
-		</ul>
+		<productColors :colorArray="this.formedItemColorArray" :currentColor.sync="currentColor" />
 	</div>
 </template>
 
 <script>
+	import productColors from '../interface/v-colors';
+	import products from '../../data/products';
+	import colors from '../../data/colors';
+	//надо создать условия для клика в карточках
+	//для этого создать событие 
+
 	export default {
 		name: 'ProductItem',
-	   props: ['product'],
-	   data() {
-	     return {
-	       color: '#73B6EA'
-	     };
-	   }
+		props: ['product', 'index'],
+		components: {
+			productColors
+		},
+		data() {
+			return {
+				currentItemIndex: products.find((product) => {return product.id == this.index}).colors,
+				currentColor: 'none'
+			}
+		},
+		watch: {
+			currentColor: function(value) {
+				this.currentColor = value;
+				this.changeCard()
+			}
+		},
+		methods: {
+			changeCard() {
+				console.log('Скоро я буду менять цвета карточек')
+				console.log(this.currentColor)
+			}
+		},
+		computed: {
+			colors() {
+				return colors
+			},
+			formedItemColorArray() {
+				return colors.filter(color => this.currentItemIndex.some(item => item == color.id));
+			},
+		},
 	};
 </script>
