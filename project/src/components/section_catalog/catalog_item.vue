@@ -18,7 +18,6 @@
 
 <script>
 	import productColors from '../interface/v-colors';
-	import products from '../../data/products';
 	import colors from '../../data/colors';
 	//надо создать условия для клика в карточках
 	//для этого создать событие 
@@ -31,7 +30,7 @@
 		},
 		data() {
 			return {
-				currentItemIndex: products.find((product) => {return product.id == this.index}).colors,
+				currentItemIndex: this.product.colors,
 				currentColor: 'none'
 			}
 		},

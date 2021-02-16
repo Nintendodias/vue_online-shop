@@ -6,33 +6,34 @@
 					class="colors__radio sr-only"
 					type="radio"
 					name="color"
-					@click="selectedColor = color.id, sendColor()"
+					v-model="sendColor"
 					:value="color.id"
 				/>
-				<span class="colors__value" :style="{backgroundColor: color.encoding}"></span>
+				<span class="colors__value" :style="{ backgroundColor: color.encoding }"></span>
 			</label>
 		</li>
 	</ul>
 </template>
 <script>
-
+//у сеттера идет привязка к значению value у input, потому value в сетторе приходит сразу color.id
 	export default {
-    name: 'productColors',
-    props: ['colorArray', 'currentColor'],
-    data() {
-      return {
-        selectedColor: 'none'
-      }
-    },
-    watch: {
-      currentColor(value) {
-        this.selectedColor = value;
-      },
-    },
-    methods: {
-      sendColor() {
-        this.$emit('update:currentColor', this.selectedColor);
-      }
-    },
+		name: 'productColors',
+		props: ['colorArray', 'currentColor'],
+		data() {
+			return {
+				selectedColor: 'none',
+			};
+		},
+		computed: {
+			sendColor: {
+				get() {
+					return this.selectedColor;
+				},
+				set(value) {
+          console.log(value)
+					this.$emit('update:currentColor', value);
+				},
+			},
+		},
 	};
 </script>
