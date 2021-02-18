@@ -1,23 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import page_main from "../views/Home.vue";
+import page_main from "../views/page_home.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "main",
+    name: "page_main",
     component: page_main
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/product",
+    name: "page_product",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import("../views/page_product.vue")
   }
 ];
 
