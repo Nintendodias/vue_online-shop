@@ -109,8 +109,8 @@
 </template>
 
 <script>
-  import categories from '@/data/categories';
-	import colors from '@/data/colors';
+  import categories from '../data/categories';
+	import colors from '../data/colors';
 	import productColors from './interface/v-colors';
 
 	export default {
