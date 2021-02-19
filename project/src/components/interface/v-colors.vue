@@ -30,7 +30,6 @@
 					return this.selectedColor;
 				},
 				set(value) {
-          console.log(value)
 					this.$emit('update:currentColor', value);
 				},
 			},
