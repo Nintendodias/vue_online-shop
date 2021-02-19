@@ -27,7 +27,6 @@
 						width="570"
 						height="570"
 						:src="product.img"
-						srcset="img/phone-square@2x.jpg 2x"
 						:alt="product.name"
 					/>
 				</div>
