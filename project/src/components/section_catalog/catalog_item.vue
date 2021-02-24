@@ -1,13 +1,13 @@
 <template>
 	<div> 
-		<a class="catalog__pic" href="#" @click.prevent="goToPage('product', {id: product.id})">
+		<router-link class="catalog__pic" :to="{name: 'page_product', params: {id: product.id}}">
 			<img :src="product.img" :alt="product.name" />
-		</a>
+		</router-link>
 
 		<h3 class="catalog__title">
-			<a href="#">
+			<router-link :to="{name: 'page_product', params: {id: product.id}}">
 				{{ product.name }}
-			</a>
+			</router-link>
 		</h3>
 
 		<span class="catalog__price"> {{ product.price | numberFormat }}₽ </span>
